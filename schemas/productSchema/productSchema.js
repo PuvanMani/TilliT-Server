@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema({
         default: 0.0
     },
     Ratings: {
-        type: String,
+        type: Number,
         required: [true, "Ratings is Required"],
         default: 0
     },
@@ -42,15 +42,12 @@ const productSchema = new mongoose.Schema({
     },
     Reviews: [
         {
-            name: {
-                type: String,
+            user: mongoose.Schema.Types.ObjectId,
+            Rating: {
+                type: Number,
                 required: true
             },
-            rating: {
-                type: String,
-                required: true
-            },
-            comment: {
+            Comment: {
                 type: String,
                 required: true
             }

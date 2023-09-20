@@ -22,12 +22,12 @@ const userSchema = new mongoose.Schema({
         maxlength: [6, "Password Cannot Exceed 6 Characters"],
         select: false
     },
-    role: {
+    Role: {
         type: String,
         default: 'user'
     },
-    resetPasswordToken: String,
-    resetPasswordTokenExpire: Date,
+    ResetPasswordToken: String,
+    ResetPasswordTokenExpire: Date,
     CreatedDate: {
         type: Date,
         default: Date.now()
@@ -47,15 +47,14 @@ userSchema.methods.getJwtToken = function () {
     })
 }
 userSchema.methods.isValidPassword = async function (Password) {
-    console.log(Password, this.Password)
     return await bcrypt.compare(Password, this.Password)
 }
 
 userSchema.methods.getResetToken = async function () {
 
     const token = crypto.randomBytes(20).toString('hex');
-    this.resetPasswordToken = crypto.createHash('sha256').update(token).digest('hex');
-    this.resetPasswordTokenExpire = Date.now() + 30 * 60 * 1000;
+    this.ResetPasswordToken = crypto.createHash('sha256').update(token).digest('hex');
+    this.ResetPasswordTokenExpire = Date.now() + 30 * 60 * 1000;
 
     return token
 }
