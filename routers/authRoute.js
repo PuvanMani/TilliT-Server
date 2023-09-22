@@ -4,6 +4,7 @@ const authRoute = require('express').Router();
 
 //User Route
 authRoute.route("/auth/register").post(AuthMethods.registerUser);
+authRoute.route("/auth/register/otp").post(AuthMethods.registerUserOTP);
 authRoute.route("/auth/login").post(AuthMethods.loginUser);
 authRoute.route("/auth/logout").get(AuthMethods.logoutUser);
 authRoute.route("/auth/password/forgot").post(AuthMethods.forgotPassword);

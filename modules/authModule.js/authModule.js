@@ -19,6 +19,31 @@ AuthMethods.prototype.registerUser = catchAsyncError(async function (req, res, n
     sendToken(user, 201, res)
 })
 
+//register user Otp Verification- /api/v1/auth/register/otp 
+AuthMethods.prototype.registerUserOTP = catchAsyncError(async function (req, res, next) {
+    const { Email } = req.body
+    function GenerateOTP() {
+        var digits = '0123456789';
+        let OTP = '';
+        for (let i = 0; i < 4; i++) {
+            OTP += digits[Math.floor(Math.random() * 10)];
+        }
+        return OTP;
+    }
+    const OTP = GenerateOTP()
+    const message = ` Your registration otp is ${OTP}. If you not Requested this email, don't consider.`
+    sendEmail({
+        email: Email,
+        subject: "TilliT OTP Verification",
+        message
+    })
+
+    res.status(200).json({
+        status: true,
+        otp: OTP
+    })
+})
+
 //login user - /api/v1/auth/login 
 AuthMethods.prototype.loginUser = catchAsyncError(async function (req, res, next) {
     const { Email, Password } = req.body

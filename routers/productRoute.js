@@ -13,7 +13,7 @@ productRoute.route("/reviews").get(isAuthendicate, ProductMethords.getReviews)
     .delete(isAuthendicate, ProductMethords.deleteReviews)
 
 // Admin Route
-productRoute.route("/products").get(isAuthendicate, authorizeRoles('admin'), ProductMethords.listProduct);
+productRoute.route("/products").get(ProductMethords.listProduct);
 productRoute.route("/product/create").post(isAuthendicate, authorizeRoles('admin'), ProductMethords.createNewProduct);
 
 module.exports = productRoute;

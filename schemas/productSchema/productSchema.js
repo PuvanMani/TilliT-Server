@@ -63,7 +63,7 @@ const productSchema = new mongoose.Schema({
         default: Date.now()
     },
     NetQuantity: {
-        type: Number,
+        type: Array,
         required: [true, "Net Quantity is Required"]
     },
     Images: [
